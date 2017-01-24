@@ -4,12 +4,10 @@ Created on 23Jan.,2017
 @author: jonathan
 '''
 
-import sys
-from PyQt5.QtWidgets import QApplication, QMainWindow, QDesktopWidget, qApp
-from PyQt5.QtWidgets import QAction
+from PyQt5.QtWidgets import QMainWindow, QDesktopWidget, qApp, QAction
 from PyQt5.QtGui import QIcon
 from util.constants import APPLICATION_NAME as APPNAME
-from util.constants import KEYBOARD_SHORTCUTS, TOOLTIPS, MENULABELS
+from util.constants import KEYBOARD_SHORTCUTS, TOOLTIPS
 
 def notImplemented():
     #FIXME: This function is temporary
@@ -117,14 +115,6 @@ class mainWindow(QMainWindow):
         menuAction.setStatusTip(tooltip)
         menuAction.triggered.connect(action)
         return menuAction
-    
-        
-    
-        
-if __name__ == '__main__':
-    
-    app = QApplication(sys.argv)
-    ex = mainWindow()
-    sys.exit(app.exec_())  
+
         
         
