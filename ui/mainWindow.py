@@ -9,8 +9,7 @@ from PyQt5.QtWidgets import QApplication, QMainWindow, QDesktopWidget, qApp
 from PyQt5.QtWidgets import QAction
 from PyQt5.QtGui import QIcon
 from util.constants import APPLICATION_NAME as APPNAME
-from util.constants import KEYBOARD_SHORTCUTS
-from util.constants import TOOLTIPS
+from util.constants import KEYBOARD_SHORTCUTS, TOOLTIPS, MENULABELS
 
 class mainWindow(QMainWindow):
     '''
@@ -18,6 +17,10 @@ class mainWindow(QMainWindow):
     TODO: docs
     '''
 
+    _actions = { #FIXME: Is this the best way to do this?
+        "quit": qApp.quit,
+        "check updates": lambda: print("Checking for Updates :p") #TODO: Make it actually check for updates
+        }
 
     def __init__(self):
         '''
@@ -26,6 +29,7 @@ class mainWindow(QMainWindow):
         super().__init__()
         
         #Set up menubar and actions
+        
         self._initMenuBar()
         
         #Window management
@@ -53,50 +57,47 @@ class mainWindow(QMainWindow):
         """
         #Initialise menubar and actions
         self.menu = self.menuBar()
-        self._initExitAction()
-        self._initUpdatesAction()
+        self.menuStructure = {} #Stores the menu items
+        self._initMenuAction("File", "check updates")
+        self._initMenuAction("File", "quit")
         
         #Add file menu and items
         self.fileMenu = self.menu.addMenu('&File')
-        self.fileMenu.addAction(self._updatesAction)
-        self.fileMenu.addAction(self._exitAction)
+        self.fileMenu.addActions(self.menuStructure.get("File", []))
         
         #Add view menu and add items
         self.viewMenu = self.menu.addMenu('&View')
-        
-        
+        self.viewMenu.addActions(self.menuStructure.get("View", []))
+
         #Add tools menu and items
         self.toolsMenu = self.menu.addMenu('&Tools')
+        self.toolsMenu.addActions(self.menuStructure.get("Tools", []))
         
         #Add help menu and items
         self.helpMenu = self.menu.addMenu('&Help')
+        self.helpMenu.addActions(self.menuStructure.get("Help", []))
         
-    def _initExitAction(self):
+    def _initMenuAction(self, menu, action):
         """
-        Initialises the application exit action and associated 
-        keyboard shortcut.
+        Generic function which will create a QAction object for all menubar
+        actions, as well as setup keyboard shortcuts.
+        The menu input is a string which is the name of the menu the action
+        is under.
+        The action input is a string which refers to what the menu item does.
         
-        _initExitAction() => None
+        _initMenuAction(str, str) => None
         """
-        self._exitAction = QAction(QIcon(), '&Exit', self) #TODO: Need an icon
-        self._exitAction.setShortcut(KEYBOARD_SHORTCUTS["quit"])
-        self._exitAction.setStatusTip(TOOLTIPS["quit"])
-        #Attaches action to the application quit when triggered
-        self._exitAction.triggered.connect(qApp.quit) 
-        #self.statusBar() #Don't know if I want this yet
+        #Initialise QAction
+        menuAction = QAction(QIcon(), MENULABELS[action], self) #TODO: Sort out icons
+        menuAction.setShortcut(KEYBOARD_SHORTCUTS.get(action))
+        menuAction.setStatusTip(TOOLTIPS.get(action, ''))
+        menuAction.triggered.connect(self._actions[action])
         
-    def _initUpdatesAction(self):
-        """
-        Initialises the application 'check for updates' action and associated 
-        keyboard shortcut.
-        
-        _initUpdatesAction() => None
-        """
-        self._updatesAction = QAction(QIcon(), 'Check for Updates', self) #TODO: Need an icon
-        self._updatesAction.setShortcut(KEYBOARD_SHORTCUTS["check updates"])
-        self._updatesAction.setStatusTip(TOOLTIPS["check updates"])
-        #TODO: This needs to actually check for updates
-        
+        #Add menuAction to menuStructure dictionary
+        if self.menuStructure.get(menu):
+            self.menuStructure[menu].append(menuAction)
+        else:
+            self.menuStructure[menu] = [menuAction]        
     
         
     

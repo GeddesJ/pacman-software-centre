@@ -19,3 +19,9 @@ TOOLTIPS = {
     "quit": "Exit Application",
     "check updates": "Checks for system and application updates"
     }
+
+#Menu Labels
+MENULABELS = {
+    "quit": "&Exit",
+    "check updates": "&Check for Updates"
+    }
