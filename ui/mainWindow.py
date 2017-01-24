@@ -28,7 +28,7 @@ class mainWindow(QMainWindow):
         exitAction = QAction(QIcon(), '&Exit', self) #TODO: Need an icon
         exitAction.setShortcut(KEYBOARD_SHORTCUTS["quit"])
         exitAction.setStatusTip("Exit Application")
-        exitAction.triggered().connect(qApp.quit())
+        exitAction.triggered.connect(qApp.quit)
         
         self.statusBar()
         
