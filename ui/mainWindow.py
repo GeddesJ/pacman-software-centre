@@ -10,6 +10,7 @@ from PyQt5.QtWidgets import QAction
 from PyQt5.QtGui import QIcon
 from util.constants import APPLICATION_NAME as APPNAME
 from util.constants import KEYBOARD_SHORTCUTS
+from util.constants import TOOLTIPS
 
 class mainWindow(QMainWindow):
     '''
@@ -25,7 +26,6 @@ class mainWindow(QMainWindow):
         super().__init__()
         
         #Set up menubar and actions
-        self._initExitAction()
         self._initMenuBar()
         
         #Window management
@@ -51,24 +51,55 @@ class mainWindow(QMainWindow):
         
         initMenuBar() => None
         """
+        #Initialise menubar and actions
         self.menu = self.menuBar()
+        self._initExitAction()
+        self._initUpdatesAction()
+        
+        #Add file menu and items
         self.fileMenu = self.menu.addMenu('&File')
+        self.fileMenu.addAction(self._updatesAction)
         self.fileMenu.addAction(self._exitAction)
+        
+        #Add view menu and add items
+        self.viewMenu = self.menu.addMenu('&View')
+        
+        
+        #Add tools menu and items
+        self.toolsMenu = self.menu.addMenu('&Tools')
+        
+        #Add help menu and items
+        self.helpMenu = self.menu.addMenu('&Help')
         
     def _initExitAction(self):
         """
-        Initialises the application exit action and keyboard shortcut
-        associated with the action.
+        Initialises the application exit action and associated 
+        keyboard shortcut.
         
-        initExitAction
+        _initExitAction() => None
         """
         self._exitAction = QAction(QIcon(), '&Exit', self) #TODO: Need an icon
         self._exitAction.setShortcut(KEYBOARD_SHORTCUTS["quit"])
-        self._exitAction.setStatusTip("Exit Application")
+        self._exitAction.setStatusTip(TOOLTIPS["quit"])
         #Attaches action to the application quit when triggered
         self._exitAction.triggered.connect(qApp.quit) 
         #self.statusBar() #Don't know if I want this yet
         
+    def _initUpdatesAction(self):
+        """
+        Initialises the application 'check for updates' action and associated 
+        keyboard shortcut.
+        
+        _initUpdatesAction() => None
+        """
+        self._updatesAction = QAction(QIcon(), 'Check for Updates', self) #TODO: Need an icon
+        self._updatesAction.setShortcut(KEYBOARD_SHORTCUTS["check updates"])
+        self._updatesAction.setStatusTip(TOOLTIPS["check updates"])
+        #TODO: This needs to actually check for updates
+        
+    
+        
+    
         
 if __name__ == '__main__':
     
