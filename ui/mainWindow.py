@@ -21,20 +21,6 @@ class mainWindow(QMainWindow):
     TODO: docs
     '''
 
-    _actions = { #FIXME: Is this the best way to do this?
-        "quit": qApp.quit,
-        "check updates": lambda: print("Checking for Updates :p"), #TODO: Make it actually check for updates
-        "clear": notImplemented,
-        "apply": notImplemented,
-        "installed": notImplemented,
-        "groups": notImplemented,
-        "settings": notImplemented,
-        "help": notImplemented,
-        "glossary": notImplemented,
-        "about": notImplemented,
-        "aboutqt": notImplemented
-        }
-
     def __init__(self):
         '''
         Constructor: mainWindow() => None
@@ -42,7 +28,7 @@ class mainWindow(QMainWindow):
         super().__init__()
         
         #Set up menubar and actions
-        
+        self.menuStructure()        
         self._initMenuBar()
         
         #Window management
@@ -50,6 +36,35 @@ class mainWindow(QMainWindow):
         self.centre()
         self.setWindowTitle(APPNAME)
         self.show()
+        
+    def menuStructure(self):
+        """
+        A function to keep everything neat. Just creates the dictionary
+        containing a description of the elements which make up the menubar
+        structure in the menubar.
+        
+        menuStructure() => None
+        """
+        self._menuStructure = [ #Stores all the menubar items
+        ("&File", [
+            ("&Check for Updates", TOOLTIPS["check updates"], notImplemented),
+            ("&Apply Changes", TOOLTIPS["apply"], notImplemented),
+            ("&Clear Selection", TOOLTIPS["clear"], notImplemented),
+            ("&Exit", TOOLTIPS["quit"], qApp.quit)]),
+        
+        ("&View", [
+            ("&Installed", TOOLTIPS["installed"], notImplemented),
+            ("&Package Groups", TOOLTIPS["groups"], notImplemented)]),
+        
+        ("&Tools", [
+            ("&Settings", TOOLTIPS["settings"], notImplemented)]),
+                               
+        ("&Help", [
+            ("&Help", TOOLTIPS["help"], notImplemented),
+            ("&Glossary", TOOLTIPS["glossary"], notImplemented),
+            ("&About {}".format(APPNAME), TOOLTIPS["about"], notImplemented),
+            ("&About Qt", TOOLTIPS["aboutqt"], notImplemented)]) 
+        ]
         
     def centre(self):
         """
@@ -69,61 +84,39 @@ class mainWindow(QMainWindow):
         initMenuBar() => None
         """
         #Initialise menubar and actions
-        self.menu = self.menuBar()
-        self.menuStructure = {} #Stores the menu items
-        #FIXME: Is there a better way to organize this?
-        self._initMenuAction("File", "check updates")
-        self._initMenuAction("File", "apply")
-        self._initMenuAction("File", "clear")
-        self._initMenuAction("File", "quit")
+        self.menubar = self.menuBar()
+        self.menuObjects = {} #Stores the menubar items
+        self.menus = [] #Stores parent menus
         
-        self._initMenuAction("View", "installed")
-        self._initMenuAction("View", "groups")
-        
-        self._initMenuAction("Tools", "settings")
-        
-        self._initMenuAction("Help", "help")
-        self._initMenuAction("Help", "glossary")
-        self._initMenuAction("Help", "about")
-        self._initMenuAction("Help", "aboutqt")
-        
-        #Add file menu and items
-        self.fileMenu = self.menu.addMenu('&File')
-        self.fileMenu.addActions(self.menuStructure.get("File", []))
-        
-        #Add view menu and add items
-        self.viewMenu = self.menu.addMenu('&View')
-        self.viewMenu.addActions(self.menuStructure.get("View", []))
+        #Create menus and menubar objects
+        for menuname, menuiteminfolist in self._menuStructure:
+            menu = self.menubar.addMenu(menuname)
+            self.menus.append(menu)
+            self.menuObjects[menuname] = []
+            
+            for menuiteminfo in menuiteminfolist:
+                menuaction = self._initMenuAction(menuiteminfo)
+                self.menuObjects[menuname].append(menuaction)
+                menu.addAction(menuaction)
 
-        #Add tools menu and items
-        self.toolsMenu = self.menu.addMenu('&Tools')
-        self.toolsMenu.addActions(self.menuStructure.get("Tools", []))
         
-        #Add help menu and items
-        self.helpMenu = self.menu.addMenu('&Help')
-        self.helpMenu.addActions(self.menuStructure.get("Help", []))
-        
-    def _initMenuAction(self, menu, action):
+    def _initMenuAction(self, menuinfo):
         """
         Generic function which will create a QAction object for all menubar
         actions, as well as setup keyboard shortcuts.
-        The menu input is a string which is the name of the menu the action
-        is under.
-        The action input is a string which refers to what the menu item does.
+        The menuinfo input is a tuple featuring the item name, tooltip
+        description and a function which will execute when the item is pressed.
         
-        _initMenuAction(str, str) => None
+        _initMenuAction( (str, str, func) ) => QAction
         """
+        #Pull out data
+        name, tooltip, action = menuinfo
         #Initialise QAction
-        menuAction = QAction(QIcon(), MENULABELS[action], self) #TODO: Sort out icons
-        menuAction.setShortcut(KEYBOARD_SHORTCUTS.get(action, ""))
-        menuAction.setStatusTip(TOOLTIPS.get(action, ''))
-        menuAction.triggered.connect(self._actions[action])
-        
-        #Add menuAction to menuStructure dictionary
-        if self.menuStructure.get(menu):
-            self.menuStructure[menu].append(menuAction)
-        else:
-            self.menuStructure[menu] = [menuAction]     
+        menuAction = QAction(QIcon(), name, self) #TODO: Sort out icons
+        menuAction.setShortcut(KEYBOARD_SHORTCUTS.get(name, ""))
+        menuAction.setStatusTip(tooltip)
+        menuAction.triggered.connect(action)
+        return menuAction
     
         
     
