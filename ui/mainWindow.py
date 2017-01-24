@@ -24,18 +24,9 @@ class mainWindow(QMainWindow):
         '''
         super().__init__()
         
-        #Setting up exit action
-        exitAction = QAction(QIcon(), '&Exit', self) #TODO: Need an icon
-        exitAction.setShortcut(KEYBOARD_SHORTCUTS["quit"])
-        exitAction.setStatusTip("Exit Application")
-        exitAction.triggered.connect(qApp.quit)
-        
-        self.statusBar()
-        
-        #Setting up menubar
-        self.menu = self.menuBar()
-        self.fileMenu = self.menu.addMenu('&File')
-        self.fileMenu.addAction(exitAction)
+        #Set up menubar and actions
+        self._initExitAction()
+        self._initMenuBar()
         
         #Window management
         self.resize(900, 610)
@@ -53,6 +44,31 @@ class mainWindow(QMainWindow):
         cp = QDesktopWidget().availableGeometry().center()
         qr.moveCenter(cp)
         self.move(qr.topLeft())
+        
+    def _initMenuBar(self):
+        """
+        Initialises the application menubar.
+        
+        initMenuBar() => None
+        """
+        self.menu = self.menuBar()
+        self.fileMenu = self.menu.addMenu('&File')
+        self.fileMenu.addAction(self._exitAction)
+        
+    def _initExitAction(self):
+        """
+        Initialises the application exit action and keyboard shortcut
+        associated with the action.
+        
+        initExitAction
+        """
+        self._exitAction = QAction(QIcon(), '&Exit', self) #TODO: Need an icon
+        self._exitAction.setShortcut(KEYBOARD_SHORTCUTS["quit"])
+        self._exitAction.setStatusTip("Exit Application")
+        #Attaches action to the application quit when triggered
+        self._exitAction.triggered.connect(qApp.quit) 
+        #self.statusBar() #Don't know if I want this yet
+        
         
 if __name__ == '__main__':
     
