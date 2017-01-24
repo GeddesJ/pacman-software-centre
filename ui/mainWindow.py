@@ -5,11 +5,13 @@ Created on 23Jan.,2017
 '''
 
 import sys
-from PyQt5.QtWidgets import QApplication, QWidget, QDesktopWidget
+from PyQt5.QtWidgets import QApplication, QMainWindow, QDesktopWidget, qApp
+from PyQt5.QtWidgets import QAction
 from PyQt5.QtGui import QIcon
 from util.constants import APPLICATION_NAME as APPNAME
+from util.constants import KEYBOARD_SHORTCUTS
 
-class mainWindow(QWidget):
+class mainWindow(QMainWindow):
     '''
     Object representing the root window for the application.
     TODO: docs
@@ -22,6 +24,20 @@ class mainWindow(QWidget):
         '''
         super().__init__()
         
+        #Setting up exit action
+        exitAction = QAction(QIcon(), '&Exit', self) #TODO: Need an icon
+        exitAction.setShortcut(KEYBOARD_SHORTCUTS["quit"])
+        exitAction.setStatusTip("Exit Application")
+        exitAction.triggered().connect(qApp.quit())
+        
+        self.statusBar()
+        
+        #Setting up menubar
+        self.menu = self.menuBar()
+        self.fileMenu = self.menu.addMenu('&File')
+        self.fileMenu.addAction(exitAction)
+        
+        #Window management
         self.resize(900, 610)
         self.centre()
         self.setWindowTitle(APPNAME)
