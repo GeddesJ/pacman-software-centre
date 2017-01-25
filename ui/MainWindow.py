@@ -11,30 +11,29 @@ from util.constants import APPLICATION_NAME as APPNAME
 from util.constants import KEYBOARD_SHORTCUTS, TOOLTIPS
 from ui.SearchToolbar import SearchToolbar
 
-def notImplemented():
-    #FIXME: This function is temporary
-    print("Not implemented yet")   
-
 class MainWindow(QMainWindow):
     '''
     Object representing the root window for the application.
     TODO: docs
     '''
 
-    def __init__(self):
+    def __init__(self, app):
         '''
-        Constructor: MainWindow() => None
+        Constructor: MainWindow(Application) => None
         '''
         super().__init__()
+        
+        #Store a reference to the application object
+        self._application = app
                
         #Set up menubar and actions
         self.menuStructure()        
         self._initMenuBar()
         
         #Set up search toolbar
-        self.searchToolbar = QToolBar()
-        self.searchToolbar.addWidget(SearchToolbar())
-        self.addToolBar(self.searchToolbar)
+        #self.searchToolbar = QToolBar()
+        #self.searchToolbar.addWidget(SearchToolbar())
+        #self.addToolBar(self.searchToolbar)
         
         #Window management
         self.resize(900, 610)
@@ -44,7 +43,7 @@ class MainWindow(QMainWindow):
         
     def menuStructure(self):
         """
-        A function to keep everything neat. Just creates the dictionary
+        A function to keep everything neat. Just creates the list
         containing a description of the elements which make up the menubar
         structure in the menubar.
         
@@ -52,23 +51,23 @@ class MainWindow(QMainWindow):
         """
         self._menuStructure = [ #Stores all the menubar items
         ("&File", [
-            ("&Check for Updates", TOOLTIPS["check updates"], notImplemented),
-            ("&Apply Changes", TOOLTIPS["apply"], notImplemented),
-            ("&Clear Selection", TOOLTIPS["clear"], notImplemented),
-            ("&Exit", TOOLTIPS["quit"], qApp.quit)]),
+            ("check updates", "&Check for Updates"),
+            ("apply", "&Apply Changes"),
+            ("clear", "&Clear Selection"),
+            ("exit", "&Exit")]),
         
         ("&View", [
-            ("&Installed", TOOLTIPS["installed"], notImplemented),
-            ("&Package Groups", TOOLTIPS["groups"], notImplemented)]),
+            ("installed", "&Installed"),
+            ("groups", "&Package Groups")]),
         
         ("&Tools", [
-            ("&Settings", TOOLTIPS["settings"], notImplemented)]),
+            ("settings", "&Settings")]),
                                
         ("&Help", [
-            ("&Help", TOOLTIPS["help"], notImplemented),
-            ("&Glossary", TOOLTIPS["glossary"], notImplemented),
-            ("&About {}".format(APPNAME), TOOLTIPS["about"], notImplemented),
-            ("&About Qt", TOOLTIPS["aboutqt"], notImplemented)]) 
+            ("help", "&Help"),
+            ("glossary", "&Glossary"),
+            ("about", "&About {}".format(APPNAME)),
+            ("aboutqt", "&About Qt")]) 
         ]
         
     def centre(self):
@@ -92,6 +91,7 @@ class MainWindow(QMainWindow):
         self.menubar = self.menuBar()
         self.menuObjects = {} #Stores the menubar items
         self.menus = [] #Stores parent menus
+        actionmanager = self._application.getActionManager()
         
         #Create menus and menubar objects
         for menuname, menuiteminfolist in self._menuStructure:
@@ -100,28 +100,17 @@ class MainWindow(QMainWindow):
             self.menuObjects[menuname] = []
             
             for menuiteminfo in menuiteminfolist:
-                menuaction = self._initMenuAction(menuiteminfo)
-                self.menuObjects[menuname].append(menuaction)
-                menu.addAction(menuaction)
+                keyword, name = menuiteminfo
+                actionmanager.initialiseAction(keyword, self, title=name)
+                newaction = actionmanager.getAction(keyword)
+                menu.addAction(newaction)
+                
 
-        
-    def _initMenuAction(self, menuinfo):
+    
+    def _initSearchToolbar(self):
         """
-        Generic function which will create a QAction object for all menubar
-        actions, as well as setup keyboard shortcuts.
-        The menuinfo input is a tuple featuring the item name, tooltip
-        description and a function which will execute when the item is pressed.
         
-        _initMenuAction( (str, str, func) ) => QAction
         """
-        #Pull out data
-        name, tooltip, action = menuinfo
-        #Initialise QAction
-        menuAction = QAction(QIcon(), name, self) #TODO: Sort out icons
-        menuAction.setShortcut(KEYBOARD_SHORTCUTS.get(name, ""))
-        menuAction.setStatusTip(tooltip)
-        menuAction.triggered.connect(action)
-        return menuAction
 
         
         

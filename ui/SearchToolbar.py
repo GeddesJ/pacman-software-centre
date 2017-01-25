@@ -4,11 +4,11 @@ Created on 25Jan.,2017
 @author: jonathan
 '''
 import sys
-from PyQt5.QtWidgets import QWidget, QApplication, QPushButton, QLineEdit, QHBoxLayout
+from PyQt5.QtWidgets import QWidget, QApplication, QPushButton, QLineEdit, QHBoxLayout, QToolBar
 from PyQt5.QtGui import QIcon
 from PyQt5.QtCore import Qt
 
-class SearchToolbar(QWidget):
+class SearchToolbar(QToolBar):
     '''
     Object representing the toolbar containing the search box, 
     check for updates button and apply changes button
@@ -23,24 +23,8 @@ class SearchToolbar(QWidget):
         '''
         super().__init__(parent)
         
-        #Create Buttons
-        self._checkUpdatesBtn = CheckUpdatesBtn()
-        self._applyBtn = ApplyBtn()
-        
-        #Search box
-        self._searchBox = SearchBox()
-        
-        #Setup Layout Manager
-        layout = QHBoxLayout()
-        layout.addWidget(self._checkUpdatesBtn)
-        layout.addWidget(self._applyBtn)
-        layout.addStretch(1)
-        layout.addWidget(self._searchBox)
-        layout.addStretch(1)
-        self.setLayout(layout)
-        
-        self.resize(900, 50)
-        self.show()
+        #Add Check for Updates and Apply Buttons
+        self.addAction()
         
 class SearchBox(QLineEdit):
     """
