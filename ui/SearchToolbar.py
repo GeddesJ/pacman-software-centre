@@ -17,11 +17,11 @@ class SearchToolbar(QWidget):
     '''
 
 
-    def __init__(self):
+    def __init__(self, parent=None):
         '''
         Constructor
         '''
-        super().__init__()
+        super().__init__(parent)
         
         #Create Buttons
         self._checkUpdatesBtn = CheckUpdatesBtn()
@@ -39,7 +39,7 @@ class SearchToolbar(QWidget):
         layout.addStretch(1)
         self.setLayout(layout)
         
-        self.resize(900, 50) #FIXME: This is just for testing purposes
+        self.resize(900, 50)
         self.show()
         
 class SearchBox(QLineEdit):

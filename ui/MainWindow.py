@@ -4,10 +4,12 @@ Created on 23Jan.,2017
 @author: jonathan
 '''
 
-from PyQt5.QtWidgets import QMainWindow, QDesktopWidget, qApp, QAction
+from PyQt5.QtWidgets import (QMainWindow, QDesktopWidget, qApp, QAction, 
+                             QToolBar)
 from PyQt5.QtGui import QIcon
 from util.constants import APPLICATION_NAME as APPNAME
 from util.constants import KEYBOARD_SHORTCUTS, TOOLTIPS
+from ui.SearchToolbar import SearchToolbar
 
 def notImplemented():
     #FIXME: This function is temporary
@@ -24,10 +26,15 @@ class MainWindow(QMainWindow):
         Constructor: MainWindow() => None
         '''
         super().__init__()
-        
+               
         #Set up menubar and actions
         self.menuStructure()        
         self._initMenuBar()
+        
+        #Set up search toolbar
+        self.searchToolbar = QToolBar()
+        self.searchToolbar.addWidget(SearchToolbar())
+        self.addToolBar(self.searchToolbar)
         
         #Window management
         self.resize(900, 610)

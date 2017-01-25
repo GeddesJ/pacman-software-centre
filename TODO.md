@@ -28,3 +28,5 @@ QCompleter.
 
 8. Get application list from the Arch Wiki, and filter through to a way that
 can be dealt with by the application.
+
+9. Application animations?
