@@ -24,20 +24,11 @@ class SearchToolbar(QWidget):
         super().__init__()
         
         #Create Buttons
-        
-        #Check for updates button
-        self._checkUpdatesBtn = QPushButton("Check for Updates")
-        self._checkUpdatesBtn.setIcon(QIcon("refresh.png"))
-        
-        #Apply changes button
-        self._applyBtn = QPushButton("Apply Changes")
-        self._applyBtn.setIcon(QIcon("tick.png"))
+        self._checkUpdatesBtn = CheckUpdatesBtn()
+        self._applyBtn = ApplyBtn()
         
         #Search box
-        self._searchBox = QLineEdit()
-        self._searchBox.setPlaceholderText("Type to Search")
-        self._searchBox.setMinimumWidth(400)
-        self._searchBox.setAlignment(Qt.AlignCenter)
+        self._searchBox = SearchBox()
         
         #Setup Layout Manager
         layout = QHBoxLayout()
@@ -51,13 +42,21 @@ class SearchToolbar(QWidget):
         self.resize(900, 50) #FIXME: This is just for testing purposes
         self.show()
         
-class SearchBox(QWidget):
+class SearchBox(QLineEdit):
     """
     Object representing the package search box and associate functions to send
     off search requests.
     
     TODO: docs
     """
+    
+    def __init__(self):
+        "Constructor: SearchBox() => None"
+        super().__init__()
+        self.setPlaceholderText("Type to Search")
+        self.setMinimumWidth(400)
+        self.setAlignment(Qt.AlignCenter)
+    
     
 class CheckUpdatesBtn(QPushButton):
     """
@@ -66,13 +65,12 @@ class CheckUpdatesBtn(QPushButton):
     TODO: docs
     """
     
-    def __init__(self, title, parent):
+    def __init__(self):
         "Constructor: CheckUpdatesBtn() => None"
-        super().__init__(title, parent)
+        super().__init__("Check for Updates")
+        self.setIcon(QIcon("refresh.png")) #FIXME: This needs to be changed when we deal with icons
         
-        
-        
-    
+            
 class ApplyBtn(QPushButton):
     """
     A Q___ which when clicked will begin the process of applying package and
@@ -80,6 +78,11 @@ class ApplyBtn(QPushButton):
     
     TODO: docs
     """
+    
+    def __init__(self):
+        "Constructor: ApplyBtn => None"
+        super().__init__("Apply Changes")
+        self.setIcon(QIcon("tick.png")) #FIXME: This needs to be changed when we deal with icons
         
 if __name__ == "__main__":
     #FIXME: This is temporary
