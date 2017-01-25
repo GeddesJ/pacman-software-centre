@@ -22,3 +22,9 @@ in the background. Could be getting into SystemD territory.
 for the packages, so not only will the package manager integrate well with the 
 user's themes but it will look more appealing. Problem is, I will definitely 
 need a fallback if there are missing icons.
+
+7. Auto complete for search - could be easy given there is a Qt module called 
+QCompleter.
+
+8. Get application list from the Arch Wiki, and filter through to a way that
+can be dealt with by the application.
