@@ -13,7 +13,7 @@ def notImplemented():
     #FIXME: This function is temporary
     print("Not implemented yet")   
 
-class mainWindow(QMainWindow):
+class MainWindow(QMainWindow):
     '''
     Object representing the root window for the application.
     TODO: docs
@@ -21,7 +21,7 @@ class mainWindow(QMainWindow):
 
     def __init__(self):
         '''
-        Constructor: mainWindow() => None
+        Constructor: MainWindow() => None
         '''
         super().__init__()
         
