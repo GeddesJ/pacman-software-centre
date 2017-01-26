@@ -43,32 +43,5 @@ class SearchWidget(QLineEdit):
         self.setPlaceholderText("Type to Search")
         self.setMinimumWidth(400)
         self.setAlignment(Qt.AlignCenter)
-    
-    
-class CheckUpdatesBtn(QPushButton):
-    """
-    A Q___ which when clicked will check for package updates
-    
-    TODO: docs
-    """
-    
-    def __init__(self):
-        "Constructor: CheckUpdatesBtn() => None"
-        super().__init__("Check for Updates")
-        self.setIcon(QIcon("refresh.png")) #FIXME: This needs to be changed when we deal with icons
-        
-            
-class ApplyBtn(QPushButton):
-    """
-    A Q___ which when clicked will begin the process of applying package and
-    application changes the user has queued. 
-    
-    TODO: docs
-    """
-    
-    def __init__(self):
-        "Constructor: ApplyBtn => None"
-        super().__init__("Apply Changes")
-        self.setIcon(QIcon("tick.png")) #FIXME: This needs to be changed when we deal with icons
         
     
