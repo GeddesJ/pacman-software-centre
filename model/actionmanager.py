@@ -51,10 +51,10 @@ class ActionManager(object):
         """
         #Extract info
         title = kwargs.get("title", keyword)
-        icon = kwargs.get("icon", None)
+        icon = kwargs.get("icon")
         tooltip = kwargs.get("tooltip", TOOLTIPS.get(keyword, ""))
         shortcut = kwargs.get("shortcut", KEYBOARD_SHORTCUTS.get(keyword, ""))
-        action = kwargs.get("action", self.notImplemented)
+        action = kwargs.get("action")
         
         #Initialise QAction
         if icon is None:
@@ -64,7 +64,9 @@ class ActionManager(object):
             
         newAction.setShortcut(shortcut)
         newAction.setStatusTip(tooltip)
-        newAction.triggered.connect(action)
+        
+        if action is not None:
+            newAction.triggered.connect(action)
         
         #Add to ActionManager
         self._actions[keyword] = newAction
@@ -86,7 +88,5 @@ class ActionManager(object):
         bind(str, func) => None
         """
         self.getAction(keyword).triggered.connect(function)
-        
-    def notImplemented(self):
-        "Runs if an action has no associated function."
-        print("Not Implemented")
+    
+    
