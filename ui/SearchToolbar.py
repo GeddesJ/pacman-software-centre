@@ -41,7 +41,7 @@ class SearchWidget(QLineEdit):
         "Constructor: SearchWidget() => None"
         super().__init__()
         self.setPlaceholderText("Type to Search")
-        self.setMinimumWidth(400)
+        self.setMinimumWidth(300)
         self.setAlignment(Qt.AlignCenter)
         
     
