@@ -4,11 +4,9 @@ Created on 23Jan.,2017
 @author: jonathan
 '''
 
-from PyQt5.QtWidgets import (QMainWindow, QDesktopWidget, qApp, QAction, 
-                             QToolBar)
+from PyQt5.QtWidgets import (QMainWindow, QDesktopWidget, QToolBar)
 from PyQt5.QtGui import QIcon
 from util.constants import APPLICATION_NAME as APPNAME
-from util.constants import KEYBOARD_SHORTCUTS, TOOLTIPS
 from ui.SearchToolbar import SearchToolbar
 
 class MainWindow(QMainWindow):
