@@ -39,7 +39,8 @@ class MainWindow(QMainWindow):
         self.setWindowTitle(APPNAME)
         self.show()
         
-    def menuStructure(self):
+    @staticmethod
+    def menuStructure():
         """
         A function to keep everything neat. Just creates the list
         containing a description of the elements which make up the menubar
@@ -47,7 +48,7 @@ class MainWindow(QMainWindow):
         
         menuStructure() => None
         """
-        self._menuStructure = [ #Stores all the menubar items
+        return [ #Stores all the menubar items
         ("&File", [
             ("check updates", "&Check for Updates"),
             ("apply", "&Apply Changes"),
@@ -92,7 +93,7 @@ class MainWindow(QMainWindow):
         actionmanager = self._application.getActionManager()
         
         #Create menus and menubar objects
-        for menuname, menuiteminfolist in self._menuStructure:
+        for menuname, menuiteminfolist in self.menuStructure():
             menu = self.menubar.addMenu(menuname)
             self.menus.append(menu)
             self.menuObjects[menuname] = []

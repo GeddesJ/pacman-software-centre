@@ -9,13 +9,15 @@ from PyQt5.QtWidgets import QApplication
 from ui.MainWindow import MainWindow
 from model.actionmanager import ActionManager
 
-class Application(object):
+class Application(QApplication):
     """
     TODO: decide how this will be arranged and what this is for
     """
     
-    def __init__(self):
+    def __init__(self, argv):
         "Constructor: Application() => None"
+        super().__init__(argv)
+        
         self._actionManager = ActionManager()
         self._userInterface = MainWindow(self)
         
@@ -54,7 +56,9 @@ class Application(object):
         return self._userInterface
 
 if __name__ == '__main__':
-    Qapp = QApplication(sys.argv)
-    app = Application()
+    app = Application(sys.argv)
     ex = app.getUserInterface()
-    sys.exit(Qapp.exec_())
+    sys.exit(app.exec_())
+    
+    
+    
