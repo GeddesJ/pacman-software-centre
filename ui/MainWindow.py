@@ -29,9 +29,8 @@ class MainWindow(QMainWindow):
         self._initMenuBar()
         
         #Set up search toolbar
-        #self.searchToolbar = QToolBar()
-        #self.searchToolbar.addWidget(SearchToolbar())
-        #self.addToolBar(self.searchToolbar)
+        self.searchToolbar = SearchToolbar(self)
+        self.addToolBar(self.searchToolbar)
         
         #Window management
         self.resize(900, 610)
@@ -104,12 +103,14 @@ class MainWindow(QMainWindow):
                 newaction = actionmanager.getAction(keyword)
                 menu.addAction(newaction)
                 
-
-    
-    def _initSearchToolbar(self):
-        """
         
+    def getApplication(self):
         """
+        Returns the main Application object
+        
+        getApplication() => Application
+        """
+        return self._application
 
         
         

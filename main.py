@@ -11,7 +11,10 @@ from model.actionmanager import ActionManager
 
 class Application(QApplication):
     """
-    TODO: decide how this will be arranged and what this is for
+    The root application object. Responsible for passing global application
+    objects around to the sub objects.
+    
+    TODO: docs
     """
     
     def __init__(self, argv):

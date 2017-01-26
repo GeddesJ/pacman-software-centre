@@ -30,3 +30,5 @@ QCompleter.
 can be dealt with by the application.
 
 9. Application animations?
+
+10. Look at implementing logging
