@@ -54,7 +54,7 @@ class MainWindow(QMainWindow):
             ("check updates", "&Check for Updates"),
             ("apply", "&Apply Changes"),
             ("clear", "&Clear Selection"),
-            ("exit", "&Exit")]),
+            ("quit", "&Exit")]),
         
         ("&View", [
             ("installed", "&Installed"),
