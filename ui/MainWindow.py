@@ -5,9 +5,12 @@ Created on 23Jan.,2017
 '''
 
 from PyQt5.QtWidgets import (QMainWindow, QDesktopWidget)
+from PyQt5.QtCore import Qt
 from util.constants import APPLICATION_NAME as APPNAME
 from ui.SearchToolbar import SearchToolbar
+from ui.NavigationToolbar import NavigationToolbar
 import logging
+
 
 class MainWindow(QMainWindow):
     '''
@@ -33,6 +36,11 @@ class MainWindow(QMainWindow):
         self.searchToolbar = SearchToolbar(self)
         self.addToolBar(self.searchToolbar)
         logging.debug("Search Toolbar Initialised")
+        
+        #Set up navigation toolbar
+        self.navigationToolbar = NavigationToolbar()
+        self.addToolBar(Qt.LeftToolBarArea, self.navigationToolbar)
+        logging.debug("Navigation Toolbar Initialised")
         
         #Window management
         self.resize(900, 610)

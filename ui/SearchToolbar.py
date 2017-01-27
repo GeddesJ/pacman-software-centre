@@ -3,8 +3,7 @@ Created on 25Jan.,2017
 
 @author: jonathan
 '''
-from PyQt5.QtWidgets import QPushButton, QLineEdit, QToolBar
-from PyQt5.QtGui import QIcon
+from PyQt5.QtWidgets import QLineEdit, QToolBar
 from PyQt5.QtCore import Qt
 
 class SearchToolbar(QToolBar):
