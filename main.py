@@ -46,9 +46,9 @@ class Application(QApplication):
         bindActions() => None
         """
         #Quit
-        self.getActionManager().bind("quit", QApplication.quit)
+        self.getActionManager().bind("quit", self.quit)
         #About Qt
-        self.getActionManager().bind("aboutqt", QApplication.aboutQt)
+        self.getActionManager().bind("aboutqt", self.aboutQt)
         
     def getActionManager(self):
         """
@@ -66,6 +66,13 @@ class Application(QApplication):
         getUserInterface() => MainWindow
         """
         return self._userInterface
+    
+    def quit(self, *args, **kwargs):
+        """
+        Override QApplication.quit(). Exits the application.
+        """
+        logging.info("Application Termination \n")
+        super().quit(args, kwargs)
 
 if __name__ == '__main__':
     app = Application(sys.argv)
