@@ -38,7 +38,7 @@ class MainWindow(QMainWindow):
         logging.debug("Search Toolbar Initialised")
         
         #Set up navigation toolbar
-        self.navigationToolbar = NavigationToolbar()
+        self.navigationToolbar = NavigationToolbar(self)
         self.addToolBar(Qt.LeftToolBarArea, self.navigationToolbar)
         logging.debug("Navigation Toolbar Initialised")
         

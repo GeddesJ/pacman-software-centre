@@ -20,6 +20,8 @@ class NavigationToolbar(QToolBar):
         '''
         super().__init__(parent)
         
+        self._parent = parent
+        
         self.setOrientation(Qt.Vertical) #Default orientation is vertical
         
         self.addWidget(NavigationTabs())
