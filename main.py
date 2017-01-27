@@ -4,10 +4,11 @@ Created on 23Jan.,2017
 @author: jonathan
 '''
 
-import sys
+import sys, logging
 from PyQt5.QtWidgets import QApplication
 from ui.MainWindow import MainWindow
 from model.actionmanager import ActionManager
+from util.constants import LOGLEVEL, LOGPATH
 
 class Application(QApplication):
     """
@@ -21,8 +22,16 @@ class Application(QApplication):
         "Constructor: Application() => None"
         super().__init__(argv)
         
+        #Set up logging
+        logging.basicConfig(filename=LOGPATH, level=LOGLEVEL,
+                format="%(asctime)s - %(name)s - %(levelname)s: %(message)s")
+        logging.info("Application Startup")
+        
+        #Initialise ActionManager and UI
         self._actionManager = ActionManager()
+        logging.debug("Action Manager Initialised")
         self._userInterface = MainWindow(self)
+        logging.debug("User Interface Initialised")
         
         #Bind actions
         self.bindActions()

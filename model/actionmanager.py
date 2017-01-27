@@ -5,6 +5,7 @@ Created on 25Jan.,2017
 '''
 from PyQt5.QtWidgets import QAction
 from util.constants import TOOLTIPS, KEYBOARD_SHORTCUTS
+import logging
 
 class ActionManager(object):
     """
@@ -59,17 +60,27 @@ class ActionManager(object):
         #Initialise QAction
         if icon is None:
             newAction = QAction(title, parent)
+            logging.info("QAction {} has no associated icon".format(keyword))
         else:
             newAction = QAction(icon, title, parent)
+            
+        logging.debug("Created new QAction {}".format(keyword))
             
         newAction.setShortcut(shortcut)
         newAction.setStatusTip(tooltip)
         
-        if action is not None:
-            newAction.triggered.connect(action)
+        if shortcut == '':
+            logging.info("QAction {} has no keyboard shortcut".format(keyword))
+        elif tooltip == '':
+            logging.info("QAction {} is missing a tooltip".format(keyword))
         
         #Add to ActionManager
         self._actions[keyword] = newAction
+        logging.debug("Added QAction {} to ActionManager".format(keyword))
+        
+        if action is not None:
+            self.bind(keyword, action)
+        
         
     def getAction(self, keyword):
         """
@@ -87,6 +98,7 @@ class ActionManager(object):
         
         bind(str, func) => None
         """
+        logging.debug("Binding a function to Qaction {}".format(keyword))
         self.getAction(keyword).triggered.connect(function)
     
     

@@ -4,10 +4,10 @@ Created on 23Jan.,2017
 @author: jonathan
 '''
 
-from PyQt5.QtWidgets import (QMainWindow, QDesktopWidget, QToolBar)
-from PyQt5.QtGui import QIcon
+from PyQt5.QtWidgets import (QMainWindow, QDesktopWidget)
 from util.constants import APPLICATION_NAME as APPNAME
 from ui.SearchToolbar import SearchToolbar
+import logging
 
 class MainWindow(QMainWindow):
     '''
@@ -27,10 +27,12 @@ class MainWindow(QMainWindow):
         #Set up menubar and actions
         self.menuStructure()        
         self._initMenuBar()
+        logging.debug("Menu Initialised")
         
         #Set up search toolbar
         self.searchToolbar = SearchToolbar(self)
         self.addToolBar(self.searchToolbar)
+        logging.debug("Search Toolbar Initialised")
         
         #Window management
         self.resize(900, 610)
