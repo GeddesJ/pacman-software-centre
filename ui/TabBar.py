@@ -3,7 +3,7 @@ Created on 28Jan.,2017
 
 @author: jonathan
 '''
-from PyQt5.QtWidgets import QWidget, QRadioButton, QBoxLayout
+from PyQt5.QtWidgets import QWidget, QBoxLayout, QPushButton
 from PyQt5.QtCore import Qt
 import logging
 
@@ -105,7 +105,7 @@ class TabBar(QWidget):
         removedTab = self._tabs.pop(index)
         self.layout().removeWidget(removedTab)
         
-class Tab(QRadioButton):
+class Tab(QPushButton):
     """
     Object representing an individual tab widget for TabBar
     
@@ -116,10 +116,15 @@ class Tab(QRadioButton):
         "Constructor: Tab(str, QWidget, QIcon) => None"
         super().__init__(parent)
         
+        self.setAutoExclusive(True)
+        
         if text:
             self.setText(text)
         
         if icon:
             self.setIcon(icon)
+        
+        
+        
     
     
