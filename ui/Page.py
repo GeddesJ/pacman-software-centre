@@ -3,10 +3,11 @@ Created on 28Jan.,2017
 
 @author: jonathan
 '''
-from PyQt5.QtWidgets import QWidget
+from PyQt5.QtWidgets import QFrame
 from PyQt5.QtCore import Qt
+from PyQt5.QtGui import QPalette
 
-class Page(QWidget):
+class Page(QFrame):
     '''
     A widget which represents a page - a widget which will contain other widgets
     '''
@@ -18,9 +19,15 @@ class Page(QWidget):
         '''
         super().__init__(parent)
         
-        self.setMinimumSize(400, 400)
-        #FIXME: Temp
+        self.setMinimumSize(480, 300)
+        # Set look of frame border
+        self.setFrameShape(QFrame.StyledPanel)
+        self.setFrameShadow(QFrame.Sunken)
+        # Set colour of frame
         self.setAutoFillBackground(True)
-        pallete = self.palette()
-        pallete.setColor(self.backgroundRole(), Qt.white)
-        self.setPalette(pallete)
+        p = self.palette()
+        p.setBrush(p.Background, p.dark())
+        self.setPalette(p)
+        
+        
+        

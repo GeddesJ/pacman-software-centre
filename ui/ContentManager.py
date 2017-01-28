@@ -5,6 +5,7 @@ Created on 28Jan.,2017
 '''
 from PyQt5.QtWidgets import QStackedWidget
 from ui.pages import *
+from ui.Page import Page #FIXME: Temp
 
 class ContentManager(QStackedWidget):
     '''
@@ -19,5 +20,7 @@ class ContentManager(QStackedWidget):
         Constructor: ContentManager(QWidget) => None
         '''
         super().__init__(parent)
+        self.setContentsMargins(10, 10, 10, 10)
         
+        self.addWidget(Page())
         
