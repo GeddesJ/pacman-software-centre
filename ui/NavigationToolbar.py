@@ -3,7 +3,7 @@ Created on 27Jan.,2017
 
 @author: jonathan
 '''
-from PyQt5.QtWidgets import QToolBar, QTabBar
+from PyQt5.QtWidgets import QToolBar
 from PyQt5.QtCore import Qt
 from ui.TabBar import TabBar
 

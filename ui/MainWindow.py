@@ -9,6 +9,7 @@ from PyQt5.QtCore import Qt
 from util.constants import APPLICATION_NAME as APPNAME
 from ui.SearchToolbar import SearchToolbar
 from ui.NavigationToolbar import NavigationToolbar
+from ui.ContentManager import ContentManager
 import logging
 
 
@@ -41,6 +42,11 @@ class MainWindow(QMainWindow):
         self.navigationToolbar = NavigationToolbar(self)
         self.addToolBar(Qt.LeftToolBarArea, self.navigationToolbar)
         logging.debug("Navigation Toolbar Initialised")
+        
+        #Set up content manager
+        self.contentManager = ContentManager()
+        self.setCentralWidget(self.contentManager)
+        logging.debug("Content Manager Initialised")
         
         #Window management
         self.resize(900, 610)
