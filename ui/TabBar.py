@@ -3,7 +3,7 @@ Created on 28Jan.,2017
 
 @author: jonathan
 '''
-from PyQt5.QtWidgets import QWidget, QHBoxLayout, QVBoxLayout
+from PyQt5.QtWidgets import QWidget, QRadioButton, QBoxLayout
 from PyQt5.QtCore import Qt
 import logging
 
@@ -15,11 +15,14 @@ class TabBar(QWidget):
     TODO: docs
     '''
 
-    def __init__(self, parent):
+    def __init__(self, parent=None):
         '''
         Constructor: TabBar(QWidget) => None
         '''
-        self.setOrientation(Qt.Horizontal)  # Default orientation is horizontal
+        super().__init__(parent)
+        
+        self._orientation = Qt.Horizontal  # Default orientation is horizontal
+        self.setLayout(QBoxLayout(QBoxLayout.LeftToRight, self))
         self._tabs = []
 
     def setOrientation(self, orientation):
@@ -35,13 +38,14 @@ class TabBar(QWidget):
         # TODO: Maybe this part should get a separate function?
         if orientation == Qt.Horizontal:
             logging.debug("Changed TabBar orientation to horizontal")
-            self.setLayout(QHBoxLayout())
+            self.layout().setDirection(QBoxLayout.LeftToRight)
         elif orientation == Qt.Vertical:
             logging.debug("Changed TabBar orientation to vertical")
-            self.setLayout(QVBoxLayout())
+            self.layout().setDirection(QBoxLayout.TopToBottom)
         else:
             logging.warning(
                 "Invalid orientation specified to TabBar - {}".format(orientation))
+            
 
     def orientation(self):
         """
@@ -101,11 +105,21 @@ class TabBar(QWidget):
         removedTab = self._tabs.pop(index)
         self.layout().removeWidget(removedTab)
         
-class Tab(QWidget):
+class Tab(QRadioButton):
     """
     Object representing an individual tab widget for TabBar
     
     TODO: docs
     """
+    
+    def __init__(self, text=None, parent=None, icon=None):
+        "Constructor: Tab(str, QWidget, QIcon) => None"
+        super().__init__(parent)
+        
+        if text:
+            self.setText(text)
+        
+        if icon:
+            self.setIcon(icon)
     
     

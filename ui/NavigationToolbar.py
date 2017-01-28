@@ -3,8 +3,9 @@ Created on 27Jan.,2017
 
 @author: jonathan
 '''
-from PyQt5.QtWidgets import QToolBar, QTabBar, QWidget
+from PyQt5.QtWidgets import QToolBar, QTabBar
 from PyQt5.QtCore import Qt
+from ui.TabBar import TabBar
 
 class NavigationToolbar(QToolBar):
     '''
@@ -24,10 +25,14 @@ class NavigationToolbar(QToolBar):
         
         self.setOrientation(Qt.Vertical) #Default orientation is vertical
         
-        self.addWidget(NavigationTabs())
+        self._tabBar = NavigationTabs()
+        
+        self.addWidget(self._tabBar)
+        
+        self.orientationChanged.connect(self._tabBar.setOrientation)
         
         
-class NavigationTabs(QTabBar):
+class NavigationTabs(TabBar):
     """
     Tab bar containing the tabs which navigate between the sections in the
     application.
@@ -41,11 +46,10 @@ class NavigationTabs(QTabBar):
         "Constructor: NavigationTabs() => None"
         super().__init__()
         
-        self.setTabsClosable(False) #Tabs aren't closable
-        self.setMovable(False) #Tabs aren't movable
+        self.setOrientation(Qt.Vertical)
         
         for name in self.tabNames:
-            self.addTab(name)
+            self.addTab(title = name)
         
         
         
