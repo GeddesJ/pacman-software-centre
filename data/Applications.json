@@ -1,0 +1,226 @@
+{
+	"Internet": {
+		"Network managers": [],
+		"VPN clients": [],
+		"Web browsers": [],
+		"File sharing": {
+			"Download managers": [],
+			"FTP": {
+				"FTP clients": [],
+				"FTP servers": []
+			},
+			"SSH/SFTP": {
+				"SFTP clients": [],
+				"SFTP servers": []
+			},
+			"Distributed file systems": [],
+			"BitTorrent clients": [],
+			"Other P2P networks": [],
+			"Video downloaders" : []
+		},
+		"Communication": {
+			"Email clients": [],
+			"Instant messaging": {
+				"IRC clients": [],
+				"XMPP (Jabber)": [],
+				"Multi-protocol clients": [],
+				"LAN messangers": []
+			},
+			"Voip / Softphone": []
+		},
+		"News, RSS, and blogs": {
+			"News aggregators": [],
+			"Usenet newsreaders & newsgrabbers": [],
+			"Blog software": [],
+			"Microblogging clients": []
+		},
+		"Remote desktop": {
+			"Remote desktop servers": [],
+			"Remote desktop clients": []
+		},
+		"Pastebin clients": [],
+		"Bitcoin": [],
+		"Surveying": []
+	},
+	"Multimedia": {
+		"Codecs": [],
+		"Image": {
+			"Image viewers": [],
+			"Graphics and image manipulation": []
+		},
+		"Audio": {
+			"Audio systems": [],
+			"Audio players": [],
+			"Volume managers": [],
+			"CD ripping": [],
+			"Visualisation": [],
+			"Audio tag editors": [],
+			"Sound editing": []
+		},
+		"Video": {
+			"Video players": [],
+			"Subtitles": [],
+			"DVD ripping": [],
+			"Video editors": [],
+			"Screencast": []
+		},
+		"Mobile phone managers": [],
+		"Digital camera managers": [],
+		"CD / DVD burning": [],
+		"Podcasts": [],
+		"Collection Managers": [],
+		"Lyrics fetchers": []
+	},
+	"Utilities": {
+		"Partitioning tools": [],
+		"Mount tools": [],
+		"Integrated development environments (IDEs)": [],
+		"Build automation": [],
+		"Terminal emulators": [],
+		"Files": {
+			"File managers": [],
+			"Trash management": [],
+			"File synchronisation": [],
+			"Archive and compression tools": [],
+			"Comparison, diff, merge": [],
+			"Batch renamers": [],
+			"Search and replace": []
+		},
+		"Disk cleaning": [],
+		"Disk usage display": [],
+		"Clock synchronisation": [],
+		"System maintenance": [],
+		"System monitoring": [],
+		"System information views": [],
+		"Keyboard layout switchers": [],
+		"Power management": [],
+		"Clipboard managers": [],
+		"Wallpaper setters": [],
+		"Package management": [],
+		"Input method editor": [],
+		"Finders": []
+	},
+	"Documents and Texts": {
+		"Office suites": [],
+		"Word processors": [],
+		"Document markup languages": [],
+		"Spreadsheets": [],
+		"Translation and localisation": [],
+		"Text editors": [],
+		"Readers and viewers": {
+			"E-book applications": [],
+			"E-book organisers": [],
+			"PDF and DjVu": [],
+			"Terminal pagers": [],
+			"CHM": [],
+			"Comic book (comix/manga)": []
+		},
+		"Scanning software": [],
+		"OCR software": {
+			"Engines": [],
+			"Layout analysers and user interfaces": []
+		},
+		"Note taking organisers": [],
+		"Mind-mapping tools": [],
+		"Character Selector": [],
+		"Stylus notes taking": [],
+		"Bibliographic reference managers": []
+	},
+	"Security": {
+		"Firewalls": [],
+		"Sandboxes": [],
+		"Network security": [],
+		"Threat and vulnerability detection": [],
+		"File security": [],
+		"Anti malware": [],
+		"Backup programs": [],
+		"Screen lockers": [],
+		"Hash checkers": [],
+		"Encryption, signing and steganography": [],
+		"Password managers": []
+	},
+	"Science": {
+		"Scientific documents": [],
+		"Mathematics": {
+			"Calculator": [],
+			"Computer algebra system": [],
+			"Scientific or technical computing": [],
+			"Statistics": [],
+			"Data evaluation": []
+		},
+		"Chemistry and biology": {
+			"Computational biology and bioinformatics": [],
+			"Molecules": {
+				"Viewers": [],
+				"Drawing": [],
+				"Modeling": []
+			},
+			"Periodic table": [],
+			"Biochemistry": [],
+			"Image manipulation": []
+		},
+		"Astronomy": [],
+		"Physics": {
+			"Electronics": {
+				"Digital logic": [],
+				"HDL": [],
+				"MCU IDE": [],
+				"Schematic capture editor": []
+			},
+			"Physics simulation": [],
+			"Unit conversion": []
+		},
+		"Geography": []
+	},
+	"Games": {
+		"Action and adventure": [],
+		"Arcade": [],
+		"Casual games": [],
+		"Chess simulators": [],
+		"Education": [],
+		"Interactive fiction": [],
+		"Massively multiplayer online games (MMO)": [],
+		"Platformer": [],
+		"Puzzle": [],
+		"Racing": [],
+		"Rogue-like": [],
+		"Role-playing games (RPG)": [],
+		"Shooters (FPS, third person)": [],
+		"Simulation": [],
+		"Strategy": [],
+		"Tycoon/management games": [],
+		"Visual novels": [],
+		"Game managers": []
+	},
+	"Others": {
+		"Work environment": {
+			"Bootsplash": [],
+			"Command shells": [],
+			"Terminal multiplexers": [],
+			"Desktop environments": [],
+			"Window managers": [],
+			"Window tilers": [],
+			"Virtual desktop pagers": [],
+			"Support applications": {
+				"Login managers": [],
+				"Composite managers": [],
+				"Taskbars / panels / docks": [],
+				"Application launchers": [],
+				"Logout dialogue": []
+			},
+			"Accessibility": {
+				"Screen reading": [],
+				"Speech recognition": []
+			}
+		},
+		"Finance": [],
+		"Flashcards": [],
+		"Time management": [],
+		"Emulators": {
+			"Console": [],
+			"Other": []
+		},
+		"Amateur radio": [],
+		"Display calibration": []
+	}
+}
