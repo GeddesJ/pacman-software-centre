@@ -3,10 +3,10 @@ Created on 1Feb.,2017
 
 @author: jonathan
 '''
-from PyQt5.QtWidgets import QWidget, QApplication, QHBoxLayout, QLabel
+from PyQt5.QtWidgets import QWidget, QApplication, QHBoxLayout, QLabel,\
+    QPushButton
 import sys
 from PyQt5.QtGui import QIcon
-from PyQt5.QtCore import QSize
 
 class SearchResult(QWidget):
     '''
@@ -30,15 +30,27 @@ class SearchResult(QWidget):
         self._status = status
         
         self.setLayout(QHBoxLayout())
-        self.setFixedHeight(150)
+        self.setFixedHeight(50)
+        
+        #Create widgets
         
         self.iconLabel = QLabel()
-        self.iconLabel.setPixmap(icon.actualSize(QSize(32,32)))
+        #self.iconLabel.setPixmap(icon.actualSize(32, 32)) #FIXME: Don't know how this works
         
         self.nameLabel = QLabel(name)
         
         self.statusLabel = QLabel(status)
         
+        self.installBtn = QPushButton("Install") #FIXME: This should change based upon status
+        
+        #Add widgets to layout
+        self.layout().addWidget(self.iconLabel)
+        self.layout().addWidget(self.nameLabel)
+        self.layout().addWidget(self.statusLabel)
+        self.layout().addWidget(self.installBtn)
+        
+        #Display main widget
+        self.show()
         
         
 if __name__ == "__main__":
